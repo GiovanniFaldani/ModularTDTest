@@ -9,6 +9,7 @@ TagManager:
   - Goal
   - Enemy
   - Turret
+  - Base
   layers:
   - Default
   - TransparentFX

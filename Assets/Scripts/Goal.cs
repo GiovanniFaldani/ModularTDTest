@@ -9,7 +9,8 @@ public class Goal: MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            // call game over
+            GameManager.Instance.GameOver();
         }
     }
+
 }
