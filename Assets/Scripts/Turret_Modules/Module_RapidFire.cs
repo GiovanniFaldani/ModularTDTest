@@ -9,7 +9,8 @@ public class Module_RapidFire : MonoBehaviour, IStackable, IModule
     [SerializeField] private int cost;
     [SerializeField] private float fireCooldown;
     [SerializeField] private float turnSpeed;
-    [SerializeField] GameObject shotPrefab;
+    [SerializeField] private GameObject shotPrefab;
+    [SerializeField] private Transform shotSocket;
 
 
     private float fireTime;
@@ -17,17 +18,25 @@ public class Module_RapidFire : MonoBehaviour, IStackable, IModule
     private GameObject currentTarget;
     [SerializeField] private bool active = false; // activate turret only after being built
 
-
     public void AddToBase(Turret_Base turretBase)
     {
         throw new System.NotImplementedException();
     }
 
+    public void ActivateBehavior()
+    {
+        active = true;
+    }
+
+    public void DeactivateBehavior()
+    {
+        active = false;
+    }
+
     public void Shoot()
     {
-        // always target element 0 of targets list,
-        // when killed move out of trigger so it unsubscribes from target list
-        throw new System.NotImplementedException();
+        // when killed move target out of trigger so it unsubscribes from target list
+        Instantiate(shotPrefab, shotSocket).GetComponent<Bullet>().SetDirection(currentTarget.transform.position - this.transform.position);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,6 +62,7 @@ public class Module_RapidFire : MonoBehaviour, IStackable, IModule
         if (fireTime < 0 && currentTarget != null)
         {
             Shoot();
+            fireTime = fireCooldown;
         }
     }
 

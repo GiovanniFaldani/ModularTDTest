@@ -24,6 +24,20 @@ public class Enemy : MonoBehaviour
     {
         UpdateTarget();
         MoveToTarget();
+        CheckLivelihood();
+    }
+
+    public void TakeDamage(int damage)
+    {
+        this.health -= damage;
+    }
+
+    private void CheckLivelihood()
+    {
+        if(health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void MoveToTarget()

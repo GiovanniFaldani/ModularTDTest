@@ -128,7 +128,8 @@ MonoBehaviour:
   cost: 100
   fireCooldown: 0.5
   turnSpeed: 30
-  shotPrefab: {fileID: 0}
+  shotPrefab: {fileID: 5471867028775454646, guid: 4fd18b8ac6026874e9fe1d80886f7262, type: 3}
+  shotSocket: {fileID: 4525688593626450504}
   active: 0
 --- !u!1 &4377122917661727100
 GameObject:

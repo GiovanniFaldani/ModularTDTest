@@ -5,9 +5,11 @@ public class Turret_Base : MonoBehaviour
     private IStackable[] modules = new IStackable[3]; // massimo 3 elementi stackabili
     private bool disableBuild = false; // prevents building turrets on top of each other
 
+    public Turret_Base() { }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Base"))
+        if (other.CompareTag("Base") || other.CompareTag("Path"))
         {
             other.gameObject.GetComponent<Turret_Base>().DisableBuild();
         }
@@ -15,7 +17,7 @@ public class Turret_Base : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Base"))
+        if (other.CompareTag("Base") || other.CompareTag("Path"))
         {
             other.gameObject.GetComponent<Turret_Base>().DisableBuild();
         }
@@ -30,5 +32,7 @@ public class Turret_Base : MonoBehaviour
     {
         disableBuild = false;
     }
+
+    
 
 }
