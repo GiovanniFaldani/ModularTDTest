@@ -1,9 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
-using Unity.Collections.LowLevel.Unsafe;
 
-public class Module_RapidFire : MonoBehaviour, IStackable, IModule
+public class Shooter_RapidFire : Module, IShooter
 {
     [SerializeField] private int damage;
     [SerializeField] private int cost;
@@ -16,22 +14,6 @@ public class Module_RapidFire : MonoBehaviour, IStackable, IModule
     private float fireTime;
     private List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget;
-    [SerializeField] private bool active = false; // activate turret only after being built
-
-    public void AddToBase(Turret_Base turretBase)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void ActivateBehavior()
-    {
-        active = true;
-    }
-
-    public void DeactivateBehavior()
-    {
-        active = false;
-    }
 
     public void Shoot()
     {
@@ -85,6 +67,7 @@ public class Module_RapidFire : MonoBehaviour, IStackable, IModule
         if (currentTarget != null) {
             Vector3 direction = currentTarget.transform.position - this.transform.position;
             Quaternion destination = Quaternion.LookRotation(direction);
+            destination = new Quaternion(0, destination.y, 0, destination.w); // only rotate on y axis
             this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, destination, turnSpeed);
         }
     }

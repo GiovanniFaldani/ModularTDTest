@@ -2,37 +2,44 @@ using UnityEngine;
 
 public class Turret_Base : MonoBehaviour
 {
-    private IStackable[] modules = new IStackable[3]; // massimo 3 elementi stackabili
-    private bool disableBuild = false; // prevents building turrets on top of each other
+    [SerializeField] private Module[] modules = {null, null, null}; // massimo 3 elementi stackabili
+    private float moduleHeightIncrement = 2f; // how much higher to put a module compared to previous one
 
     public Turret_Base() { }
 
-    private void OnTriggerEnter(Collider other)
+    public void AddModule(Module newModule)
     {
-        if (other.CompareTag("Base") || other.CompareTag("Path"))
+        for(int i = 0; i < modules.Length; i++)
         {
-            other.gameObject.GetComponent<Turret_Base>().DisableBuild();
+            if (modules[i] == null)
+            {
+                modules[i] = newModule;
+                newModule.gameObject.transform.parent = transform;
+                newModule.gameObject.transform.position = new Vector3(
+                    this.transform.position.x,
+                    this.transform.position.y - 1f + (i+1) * moduleHeightIncrement, // Trial and error position for module placement :)
+                    this.transform.position.z
+                    );
+                break;
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void ActivateAllModules()
     {
-        if (other.CompareTag("Base") || other.CompareTag("Path"))
+        foreach(Module module in modules)
         {
-            other.gameObject.GetComponent<Turret_Base>().DisableBuild();
+            if(module != null) module.ActivateBehavior();
         }
     }
 
-    public void DisableBuild()
+    public bool HasFreeSpace()
     {
-        disableBuild = true;
+        foreach(Module module in modules)
+        {
+            if (module == null) return true;
+        }
+        return false;
     }
-
-    public void EnableBuild()
-    {
-        disableBuild = false;
-    }
-
-    
 
 }

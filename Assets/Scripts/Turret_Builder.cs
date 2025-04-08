@@ -1,14 +1,23 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+public enum ModuleTypes
+{
+    RapidFire,
+    Flamethrower,
+    AreaDamage,
+    FireRateUp,
+    DamageUp,
+    DamageOverTime
+}
+
 // Singleton that handles call to build turrets in a given spot
 public class Turret_Builder : MonoBehaviour
 {
     [SerializeField] GameObject turretBasePrefab;
-    [SerializeField] List<GameObject> stackablePrefabs = new List<GameObject>();
+    [SerializeField] List<GameObject> modulePrefabs = new List<GameObject>();
 
     private List<Turret_Base> turretBases = new List<Turret_Base>();
-    private float moduleHeightIncrement = 2f;
 
     private static Turret_Builder instance;
     public static Turret_Builder Instance { get { return instance; } }
@@ -28,7 +37,11 @@ public class Turret_Builder : MonoBehaviour
 
     void Start()
     {
-        
+        // test methods
+        Turret_Base turret_Base = CreateBase(new Vector3(0, 0, 0));
+        CreateModule(turret_Base, ModuleTypes.RapidFire);
+        CreateModule(turret_Base, ModuleTypes.RapidFire);
+        CreateModule(turret_Base, ModuleTypes.RapidFire);
     }
 
     void Update()
@@ -38,18 +51,21 @@ public class Turret_Builder : MonoBehaviour
 
     public Turret_Base CreateBase(Vector3 position)
     {
-        return Instantiate(turretBasePrefab, new Vector3(position.x, 0.3f, position.y), Quaternion.identity).GetComponent<Turret_Base>();
+        Turret_Base created = Instantiate(turretBasePrefab, new Vector3(position.x, 0.3f, position.y), Quaternion.identity).GetComponent<Turret_Base>();
+        turretBases.Add(created);
+        return created;
     }
 
-    public IStackable CreateStack(Turret_Base turretBase, int stackIndex, int moduleIndex)
+    public void CreateModule(Turret_Base turretBase, ModuleTypes moduleType)
     {
-        float yPos = 0.3f + (stackIndex+1) * moduleHeightIncrement;
-        return Instantiate(stackablePrefabs[moduleIndex], turretBase.gameObject.transform).GetComponent<IStackable>();
+        Module module = Instantiate(modulePrefabs[(int)moduleType], turretBase.gameObject.transform).GetComponent<Module>();
+        module.AddToBase(turretBase);
+        turretBase.ActivateAllModules();
     }
 
-    public void InitializeTurret(Vector3 position, int moduleIndex)
+    // Make a new turret with selected module
+    public void InitializeTurret(Vector3 position, ModuleTypes moduleType)
     {
-        IStackable toActivate = CreateStack(CreateBase(position), 0, moduleIndex);
-        toActivate.ActivateBehavior();
+        CreateModule(CreateBase(position), moduleType);
     }
 }

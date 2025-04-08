@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public interface IModule
+public interface IShooter
 {
     public void Shoot();
 }
