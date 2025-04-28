@@ -1,5 +1,4 @@
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
 public class Bullet : MonoBehaviour
 {
@@ -39,6 +38,11 @@ public class Bullet : MonoBehaviour
     {
         this._direction = newDirection;
         //return this;
+    }
+
+    public void SetDamage(int newDamage)
+    {
+        this.damage = newDamage;
     }
 
     // hit detect an enemy

@@ -40,8 +40,8 @@ public class Turret_Builder : MonoBehaviour
         // test methods
         Turret_Base turret_Base = CreateBase(new Vector3(0, 0, 0));
         CreateModule(turret_Base, ModuleTypes.RapidFire);
-        CreateModule(turret_Base, ModuleTypes.RapidFire);
-        CreateModule(turret_Base, ModuleTypes.RapidFire);
+        CreateModule(turret_Base, ModuleTypes.AreaDamage);
+        CreateModule(turret_Base, ModuleTypes.DamageUp);
     }
 
     void Update()

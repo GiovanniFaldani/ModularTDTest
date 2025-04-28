@@ -3,31 +3,39 @@ using System.Collections.Generic;
 
 public class Shooter_RapidFire : Module, IShooter
 {
-    [SerializeField] private int damage;
+    [SerializeField] private int baseDamage;
     [SerializeField] private int cost;
-    [SerializeField] private float fireCooldown;
+    [SerializeField] private float baseFireCooldown;
     [SerializeField] private float turnSpeed;
     [SerializeField] private GameObject shotPrefab;
     [SerializeField] private Transform shotSocket;
 
-
-    private float fireTime;
+    [Header("Debug Variables")]
+    [SerializeField] private int damage;
+    [SerializeField] private float fireCooldown;
+    [SerializeField] private float fireTimer;
     private List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget;
 
     public void Shoot()
     {
         // when killed move target out of trigger so it unsubscribes from target list
-        Instantiate(shotPrefab, shotSocket).GetComponent<Bullet>().SetDirection(currentTarget.transform.position - this.transform.position);
+        Bullet shot = Instantiate(shotPrefab, shotSocket).GetComponent<Bullet>();
+        shot.SetDirection(currentTarget.transform.position - this.transform.position);
+        shot.SetDamage(damage);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        damage = baseDamage;
+        fireCooldown = baseFireCooldown;
+    }
+
     void Start()
     {
-        fireTime = fireCooldown;
+        fireTimer = fireCooldown;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (active)
@@ -40,11 +48,15 @@ public class Shooter_RapidFire : Module, IShooter
 
     void ShotCooldown()
     {
-        fireTime -= Time.deltaTime;
-        if (fireTime < 0 && currentTarget != null)
+        fireTimer -= Time.deltaTime;
+        if (fireTimer < 0 && currentTarget != null)
         {
             Shoot();
-            fireTime = fireCooldown;
+            fireTimer = fireCooldown;
+        }
+        else if (fireTimer < 0)
+        {
+            fireTimer = -1; // avoid underflow
         }
     }
 
@@ -89,5 +101,19 @@ public class Shooter_RapidFire : Module, IShooter
             targets.Remove(other.gameObject);
         }
     }
-    
+
+    public void ModifyDamage(int multiplier)
+    {
+        damage = damage * multiplier;
+    }
+
+    public void ModifyFireRate(float multiplier)
+    {
+        fireCooldown = fireCooldown * multiplier;
+    }
+
+    public void ApplyDOT()
+    {
+        throw new System.NotImplementedException();
+    }
 }

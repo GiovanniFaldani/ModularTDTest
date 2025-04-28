@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class Turret_Base : MonoBehaviour
 {
@@ -20,6 +22,11 @@ public class Turret_Base : MonoBehaviour
                     this.transform.position.y - 1f + (i+1) * moduleHeightIncrement, // Trial and error position for module placement :)
                     this.transform.position.z
                     );
+                if (newModule is IUpgrade)
+                {
+                    IUpgrade upgrade = newModule as IUpgrade;
+                    upgrade.ApplyUpgrade(this);
+                }
                 break;
             }
         }
@@ -40,6 +47,32 @@ public class Turret_Base : MonoBehaviour
             if (module == null) return true;
         }
         return false;
+    }
+
+    public bool HasShooters()
+    {
+        foreach (Module module in modules)
+        {
+            if (module is IShooter)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<IShooter> GetShooters()
+    {
+        List<IShooter> shooters = new List<IShooter>();
+        foreach (Module module in modules)
+        {
+            if (module is IShooter)
+            {
+                IShooter shooter = module as IShooter;
+                shooters.Add(shooter);
+            }
+        }
+        return shooters;
     }
 
 }

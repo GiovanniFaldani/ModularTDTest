@@ -36,6 +36,7 @@ public class Enemy : MonoBehaviour
     {
         if(health <= 0)
         {
+            this.transform.position = new Vector3(this.transform.position.x, -200, this.transform.position.y);
             Destroy(this.gameObject);
         }
     }
