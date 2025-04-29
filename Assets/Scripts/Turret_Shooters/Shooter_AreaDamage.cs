@@ -12,9 +12,11 @@ public class Shooter_AreaDamage : Module, IShooter
     [Header("Debug Variables")]
     [SerializeField] private int damage;
     [SerializeField] private float fireCooldown;
+    [SerializeField] private float range;
     [SerializeField] private float fireTimer;
     private List<GameObject> targets = new List<GameObject>();
     private GameObject currentTarget;
+    private CapsuleCollider targetingRange;
 
     public void Shoot()
     {
@@ -26,6 +28,8 @@ public class Shooter_AreaDamage : Module, IShooter
     {
         damage = baseDamage;
         fireCooldown = baseFireCooldown;
+        targetingRange = GetComponent<CapsuleCollider>();
+        range = targetingRange.radius;
     }
 
     void Start()
@@ -97,9 +101,11 @@ public class Shooter_AreaDamage : Module, IShooter
         fireCooldown = fireCooldown * multiplier;
     }
 
-    public void ApplyDOT()
+    public void ModifyRange(float multiplier)
     {
-        throw new System.NotImplementedException();
+        range = range * multiplier;
+        targetingRange.radius = range;
+        shotSocket.localScale *= multiplier;
     }
 
 }

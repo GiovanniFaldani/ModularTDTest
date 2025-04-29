@@ -8,5 +8,5 @@ public interface IShooter
 
     public void ModifyFireRate(float multiplier);
 
-    public void ApplyDOT();
+    public void ModifyRange(float multiplier);
 }

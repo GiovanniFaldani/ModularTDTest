@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private int playerMoney;
+    [SerializeField] private int startMoney;
+
+    public int playerMoney;
 
     private static GameManager instance;
     public static GameManager Instance {  get { return instance; } }
@@ -24,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        playerMoney = startMoney;
     }
 
     // Update is called once per frame

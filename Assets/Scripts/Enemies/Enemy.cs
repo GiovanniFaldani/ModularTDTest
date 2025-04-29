@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform[] pathPoints;
 
     private float height;
+    [SerializeField] private float deadtimer = -15.0f;
 
     private int targetIndex;
 
@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     {
         UpdateTarget();
         MoveToTarget();
+        CheckDestroy();
         CheckLivelihood();
     }
 
@@ -36,7 +37,20 @@ public class Enemy : MonoBehaviour
     {
         if(health <= 0)
         {
-            this.transform.position = new Vector3(this.transform.position.x, -200, this.transform.position.y);
+            // move target out of game world to unsubscribe it from turret target list
+            this.transform.position = new Vector3(-100, -100, -100);
+            deadtimer = 1.0f;
+            health = 10;
+            GameManager.Instance.AddMoney(reward);
+        }
+    }
+
+    private void CheckDestroy()
+    {
+        deadtimer -= Time.deltaTime;
+        if (deadtimer <= 0 && deadtimer > -10)
+        {
+            // Destroy object after it has been moved out of turret range
             Destroy(this.gameObject);
         }
     }

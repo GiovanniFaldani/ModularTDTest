@@ -8,10 +8,10 @@ public enum ModuleTypes
     AreaDamage,
     FireRateUp,
     DamageUp,
-    DamageOverTime
+    RangeUp
 }
 
-// Singleton that handles call to build turrets in a given spot
+// Singleton that handles calls to build turrets in a given spot
 public class Turret_Builder : MonoBehaviour
 {
     [SerializeField] GameObject turretBasePrefab;
@@ -39,9 +39,9 @@ public class Turret_Builder : MonoBehaviour
     {
         // test methods
         Turret_Base turret_Base = CreateBase(new Vector3(0, 0, 0));
-        CreateModule(turret_Base, ModuleTypes.RapidFire);
         CreateModule(turret_Base, ModuleTypes.AreaDamage);
-        CreateModule(turret_Base, ModuleTypes.DamageUp);
+        CreateModule(turret_Base, ModuleTypes.RangeUp);
+        CreateModule(turret_Base, ModuleTypes.RangeUp);
     }
 
     void Update()

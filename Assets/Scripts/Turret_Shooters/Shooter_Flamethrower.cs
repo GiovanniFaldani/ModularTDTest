@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Shooter_RapidFire : Module, IShooter
+public class Shooter_Flamethrower : Module, IShooter
 {
     [SerializeField] private int baseDamage;
     [SerializeField] private int cost;
@@ -22,8 +22,7 @@ public class Shooter_RapidFire : Module, IShooter
     public void Shoot()
     {
         // when killed move target out of trigger so it unsubscribes from target list
-        Bullet shot = Instantiate(shotPrefab, shotSocket).GetComponent<Bullet>();
-        shot.SetDirection(currentTarget.transform.position - this.transform.position);
+        Flamethrower shot = Instantiate(shotPrefab, shotSocket).GetComponent<Flamethrower>();
         shot.SetDamage(damage);
     }
 
@@ -65,7 +64,7 @@ public class Shooter_RapidFire : Module, IShooter
     }
 
     // Always returns the first target that enters the radius
-    void FindTargetFIFO() 
+    void FindTargetFIFO()
     {
         if (targets.Count > 0)
         {
@@ -80,7 +79,8 @@ public class Shooter_RapidFire : Module, IShooter
     // Rotate the turret towards the enemy
     void FollowTarget()
     {
-        if (currentTarget != null) {
+        if (currentTarget != null)
+        {
             Vector3 direction = currentTarget.transform.position - this.transform.position;
             Quaternion destination = Quaternion.LookRotation(direction);
             destination = new Quaternion(0, destination.y, 0, destination.w); // only rotate on y axis
@@ -120,5 +120,7 @@ public class Shooter_RapidFire : Module, IShooter
     {
         range = range * multiplier;
         targetingRange.radius = range;
+        shotSocket.localScale *= multiplier;
     }
 }
+

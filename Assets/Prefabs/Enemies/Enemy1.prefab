@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8e33be5f9a48624c8126238a3d8459f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
+  health: 5
   reward: 100
   damage: 1
   moveSpeed: 0.5
