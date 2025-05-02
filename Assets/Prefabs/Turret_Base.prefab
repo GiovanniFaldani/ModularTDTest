@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2714690999256379504}
   - component: {fileID: 3783136125940898890}
   - component: {fileID: -309409690261674854}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Turret_Base
   m_TagString: Base
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 8668945322532454789}
   - component: {fileID: 4509694527516839541}
   - component: {fileID: 8628048790455754598}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Base_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 488499801572740611}
   - component: {fileID: 2714690999256379504}
   - component: {fileID: 6338236202507306387}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Turret_Preview
   m_TagString: Base
   m_Icon: {fileID: 0}
@@ -71,6 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultMaterial: {fileID: 2100000, guid: 9050ca83c549cdd48867c61e8e5f4c12, type: 2}
   blockedMaterial: {fileID: 2100000, guid: 529fbe59201cce444852deaf9cc0425a, type: 2}
+  moduleType: 0
 --- !u!1 &6826696922052699094
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ GameObject:
   - component: {fileID: 8668945322532454789}
   - component: {fileID: 4509694527516839541}
   - component: {fileID: 8628048790455754598}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Base_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

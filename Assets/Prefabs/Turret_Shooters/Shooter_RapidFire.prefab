@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6547902520918136362}
   - component: {fileID: 3184349128620444696}
   - component: {fileID: 2057695564631310623}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Shooter_RapidFire
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 4525688593626450504}
   - component: {fileID: 8215649066255206217}
   - component: {fileID: 7828481772656212839}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Cannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

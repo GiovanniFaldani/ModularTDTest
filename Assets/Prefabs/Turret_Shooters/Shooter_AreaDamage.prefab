@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6547902520918136362}
   - component: {fileID: 3184349128620444696}
   - component: {fileID: 2802709944786765687}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Shooter_AreaDamage
   m_TagString: Turret
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7470631146789535211}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShotSocket
   m_TagString: Untagged
   m_Icon: {fileID: 0}

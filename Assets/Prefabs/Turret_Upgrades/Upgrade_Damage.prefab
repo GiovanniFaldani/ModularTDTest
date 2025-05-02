@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6547902520918136362}
   - component: {fileID: 2176206778148086828}
   - component: {fileID: 3184349128620444696}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Upgrade_Damage
   m_TagString: Turret
   m_Icon: {fileID: 0}

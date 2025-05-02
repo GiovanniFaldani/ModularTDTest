@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7925715331935500687}
   - component: {fileID: 4693928730430431788}
   - component: {fileID: 1999945189841043520}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -159,6 +159,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  deadtimer: -15
 --- !u!54 &1999945189841043520
 Rigidbody:
   m_ObjectHideFlags: 0
