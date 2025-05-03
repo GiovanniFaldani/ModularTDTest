@@ -638,7 +638,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Double damage
 
-    cost: 100'
+    cost: 200'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1641,6 +1641,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret_Preview
       objectReference: {fileID: 0}
+    - target: {fileID: 1935092696798651192, guid: 5f0b6e93cf7d2c940b3ee4658a6a7121, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1705,7 +1709,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Range increase
 
-    cost 150
+    cost 100
 
 '
   m_isRightToLeft: 0
@@ -2121,7 +2125,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &490948650
 Transform:
   m_ObjectHideFlags: 0
@@ -2256,7 +2260,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 523280791}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 526337482}
+        m_TargetAssemblyTypeName: UIUpdater, Assembly-CSharp
+        m_MethodName: SpawnWave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &523280791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,7 +2430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyPanel: {fileID: 659363647}
-  nextWaveButton: {fileID: 0}
+  nextWaveButton: {fileID: 523280788}
 --- !u!1 &539908796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5771,6 +5787,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 279d7735097474f4b98be6801785835c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waves:
+  - {fileID: 11400000, guid: 1861293d15ef11b4ebccc65a8c864379, type: 2}
+  timeBetweenSpawns: 0.5
+  spawnPoint: {fileID: 1085674371}
+  pathPoints:
+  - {fileID: 1384991412}
+  - {fileID: 581643715}
+  - {fileID: 1773392874}
+  - {fileID: 417694325}
+  - {fileID: 539908797}
+  - {fileID: 1758099966}
+  - {fileID: 931714549}
+  - {fileID: 1493975011}
+  - {fileID: 440029915}
+  - {fileID: 1634193232}
+  - {fileID: 1907616573}
+  - {fileID: 313142261}
+  - {fileID: 697976719}
+  - {fileID: 1031120444}
+  - {fileID: 997916726}
+  - {fileID: 1314831020}
+  - {fileID: 227749127}
+  - {fileID: 289601881}
+  - {fileID: 994693943}
+  - {fileID: 311046296}
+  - {fileID: 735503230}
+  - {fileID: 604095516}
+  - {fileID: 66405356}
+  - {fileID: 1488730932}
+  - {fileID: 734303134}
+  - {fileID: 737252427}
+  - {fileID: 656376255}
+  - {fileID: 918074977}
+  - {fileID: 1787643679}
+  - {fileID: 1115276149}
+  - {fileID: 1116366751}
 --- !u!4 &1085674371
 Transform:
   m_ObjectHideFlags: 0
@@ -7963,7 +8015,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Double Fire Rate
 
-    cost: 100'
+    cost: 200'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

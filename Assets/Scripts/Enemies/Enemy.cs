@@ -33,6 +33,11 @@ public class Enemy : MonoBehaviour
         this.health -= damage;
     }
 
+    public void SetPath(Transform[] _pathPoints)
+    {
+         this.pathPoints = _pathPoints;
+    }
+
     private void CheckLivelihood()
     {
         if(health <= 0)

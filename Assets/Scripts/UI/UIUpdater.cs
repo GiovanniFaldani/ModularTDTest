@@ -7,7 +7,7 @@ public class UIUpdater : MonoBehaviour
     public static UIUpdater Instance;
 
     [SerializeField] private TextMeshProUGUI moneyPanel;
-    [SerializeField] private GameObject nextWaveButton;
+    [SerializeField] public GameObject nextWaveButton;
 
     private void Awake()
     {
@@ -33,7 +33,9 @@ public class UIUpdater : MonoBehaviour
 
     public void SpawnWave()
     {
-       //EnemySpawner.Instance.SpawnWave() ...
+        EnemySpawner.Instance.SpawnWave();
+        // Hide spawnwave UI until next wave
+        nextWaveButton.SetActive(false);
     }
 
     public void BuildPreviewForModule(int index)

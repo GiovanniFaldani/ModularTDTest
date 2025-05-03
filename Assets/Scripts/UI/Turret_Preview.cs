@@ -19,29 +19,23 @@ public class Turret_Preview : MonoBehaviour
 
     void Update()
     {
-        // TODO follow mouse on x and z axis
         FollowMouse();
-        // TODO call builder
-        CheckBuildTurret();
+        CheckBuildModule();
+        CheckUndoBuildModule();
     }
 
     private void FollowMouse()
     {
-        //Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //transform.position = new Vector3(hit.collider.transform.position.x, 0, hit.collider.transform.position.z);
-
         //Raycast mouse position X and Z
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            
-            //transform.position = new Vector3(hit.point.x, 0.3f, hit.point.z);
             transform.position = hit.point;
         }
     }
 
-    private void CheckBuildTurret()
+    private void CheckBuildModule()
     {
         if (Input.GetMouseButton(0) && !disableBuild)
         {
@@ -49,35 +43,31 @@ public class Turret_Preview : MonoBehaviour
             {
                 Turret_Builder.Instance.CreateModule(turretSelected, moduleType);
             }
-            else
+            else if (!IsThisUpgrade())
             {
                 Turret_Base turretBase = Turret_Builder.Instance.CreateBase(transform.position);
                 Turret_Builder.Instance.CreateModule(turretBase, moduleType);
             }
-            // TODO reenable UI
+            else
+            {
+                Debug.Log("Upgrade must be stacked on a shooter!");
+                GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
+                UIUpdater.Instance.gameObject.SetActive(true);
+            }
+            // reenable UI
             UIUpdater.Instance.gameObject.SetActive(true);
             Destroy(gameObject);
         }
     }
 
-    public void Place(Vector3 position,ModuleTypes moduleType)
+    private void CheckUndoBuildModule()
     {
-        if (!disableBuild)
+        if (Input.GetMouseButton(1))
         {
-            // TODO use initializeturret if turretSelected is null, otherwise add module
-            // Turret_Builder.Instance.CreateBase();
-            if(turretSelected == null)
-            {
-                Turret_Builder.Instance.InitializeTurret(position, moduleType);
-            }
-            else
-            {
-                Turret_Builder.Instance.CreateModule(turretSelected, moduleType);
-            }
-        }
-        else
-        {
-            Debug.Log("Building blocked!");
+            // undo build
+            GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
+            UIUpdater.Instance.gameObject.SetActive(true);
+            Destroy(gameObject);
         }
     }
 
@@ -149,5 +139,13 @@ public class Turret_Preview : MonoBehaviour
             EnableBuild();
             turretSelected = null;
         }
+    }
+
+    private bool IsThisUpgrade()
+    {
+        // hardcode, ideally I'd build a dict to pair moduleType to the corresponding interface
+        if ((moduleType == ModuleTypes.DamageUp) || (moduleType == ModuleTypes.FireRateUp) || (moduleType == ModuleTypes.RangeUp))
+            return true;
+        return false;
     }
 }
