@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12786b47645c41246a091b807f3bc638, type: 3}
+  m_Name: Wave 4
+  m_EditorClassIdentifier: 
+  enemiesinWave:
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}
+  - {fileID: 884344149736126439, guid: 2efbfbd4be5563742888bde49c97ce62, type: 3}

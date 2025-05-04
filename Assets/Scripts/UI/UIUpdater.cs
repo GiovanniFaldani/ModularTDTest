@@ -1,4 +1,3 @@
-using System.Reflection;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +6,7 @@ public class UIUpdater : MonoBehaviour
     public static UIUpdater Instance;
 
     [SerializeField] private TextMeshProUGUI moneyPanel;
+    [SerializeField] private TextMeshProUGUI baseHPPanel;
     [SerializeField] public GameObject nextWaveButton;
 
     private void Awake()
@@ -24,11 +24,17 @@ public class UIUpdater : MonoBehaviour
     void Update()
     {
         UpdateMoney(); 
+        UpdateBaseHP();
     }
 
     private void UpdateMoney()
     {
         moneyPanel.text = "Money: " + GameManager.Instance.playerMoney;
+    }
+
+    private void UpdateBaseHP()
+    {
+        baseHPPanel.text = "Base HP: " + GameManager.Instance.baseHP;
     }
 
     public void SpawnWave()
@@ -40,7 +46,6 @@ public class UIUpdater : MonoBehaviour
 
     public void BuildPreviewForModule(int index)
     {
-        // TODO check for money
         ModuleTypes moduleType = (ModuleTypes)index;
         if (GameManager.Instance.playerMoney >= Turret_Builder.Instance.costs[moduleType])
         {
@@ -49,7 +54,7 @@ public class UIUpdater : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough money!");
+            MessagePrinter.Instance.PrintMessage("Not enough money!", 5);
         }
     }
 }

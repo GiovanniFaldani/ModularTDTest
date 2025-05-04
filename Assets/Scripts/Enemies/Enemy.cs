@@ -46,6 +46,7 @@ public class Enemy : MonoBehaviour
             this.transform.position = new Vector3(-100, -100, -100);
             deadtimer = 1.0f;
             health = 10;
+            EnemySpawner.Instance.UntrackEnemy(this);
             GameManager.Instance.AddMoney(reward);
         }
     }
@@ -63,7 +64,7 @@ public class Enemy : MonoBehaviour
     private void MoveToTarget()
     {
         
-        this.transform.position = Vector3.MoveTowards(this.transform.position, pathPoints[targetIndex].position, moveSpeed);
+        this.transform.position = Vector3.MoveTowards(this.transform.position, pathPoints[targetIndex].position, moveSpeed * Time.deltaTime);
         // Maintain height
         this.transform.position = new Vector3(this.transform.position.x, height, this.transform.position.z);
     }
@@ -81,7 +82,10 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Goal"))
         {
             other.GetComponent<Goal>().TakeDamage(damage);
-            Destroy(this.gameObject);
+            this.transform.position = new Vector3(-100, -100, -100);
+            deadtimer = 1.0f;
+            health = 10;
+            EnemySpawner.Instance.UntrackEnemy(this);
         }
     }
 }

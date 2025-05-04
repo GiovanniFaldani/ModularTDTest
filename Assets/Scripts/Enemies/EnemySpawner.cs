@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -12,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     private SO_Wave currentWave;
     private float _timer = 0;
     private bool _started = false;
-    private Enemy currentEnemy;
+    private List<Enemy> liveEnemies = new List<Enemy>();
 
     private int enemyIndex = 0;
 
@@ -42,10 +43,7 @@ public class EnemySpawner : MonoBehaviour
             currentWave = waves[waveIndex];
             enemyIndex = 0;
             _started = true;
-        }
-        else
-        {
-            // Win game
+            waveIndex++;
         }
     }
 
@@ -57,7 +55,8 @@ public class EnemySpawner : MonoBehaviour
             if (enemyIndex < currentWave.enemiesinWave.Length)
             {
                 if (_timer <= 0) { 
-                    currentEnemy = Instantiate(currentWave.enemiesinWave[enemyIndex], spawnPoint).GetComponent<Enemy>();
+                    Enemy currentEnemy = Instantiate(currentWave.enemiesinWave[enemyIndex], spawnPoint).GetComponent<Enemy>();
+                    liveEnemies.Add(currentEnemy);
                     currentEnemy.SetPath(pathPoints);
                     enemyIndex += 1;
                     _timer = timeBetweenSpawns;
@@ -65,13 +64,22 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                if (currentEnemy == null)
+                if (liveEnemies.Count <= 0)
                 {
                     _started = false;
-                     UIUpdater.Instance.nextWaveButton.SetActive(true);
+                    UIUpdater.Instance.nextWaveButton.SetActive(true);
+                    if(waveIndex >= waves.Length)
+                    {
+                        GameManager.Instance.WinGame();
+                    }
                 }
             }
         }
+    }
+
+    public void UntrackEnemy(Enemy _enemy)
+    {
+        liveEnemies.Remove(_enemy);
     }
 
 }

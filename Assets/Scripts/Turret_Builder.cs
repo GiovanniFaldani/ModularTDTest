@@ -47,17 +47,6 @@ public class Turret_Builder : MonoBehaviour
         costs.Add(ModuleTypes.FireRateUp, 200);
         costs.Add(ModuleTypes.DamageUp, 200);
         costs.Add(ModuleTypes.RangeUp, 100);
-
-        // test methods
-        //Turret_Base turret_Base = CreateBase(new Vector3(0, 0, 0));
-        //CreateModule(turret_Base, ModuleTypes.AreaDamage);
-        //CreateModule(turret_Base, ModuleTypes.RangeUp);
-        //CreateModule(turret_Base, ModuleTypes.RangeUp);
-    }
-
-    void Update()
-    {
-        
     }
 
     public Turret_Base CreateBase(Vector3 position)

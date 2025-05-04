@@ -127,7 +127,7 @@ MonoBehaviour:
   active: 1
   baseDamage: 10
   cost: 150
-  baseFireCooldown: 5
+  baseFireCooldown: 2
   shotPrefab: {fileID: 5471867028775454646, guid: 7b45987aeb90fcc4b97af043e05375b0, type: 3}
   shotSocket: {fileID: 7470631146789535211}
   damage: 0

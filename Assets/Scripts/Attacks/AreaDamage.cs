@@ -5,12 +5,6 @@ public class AreaDamage : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float lifetime;
 
-
-    void Start()
-    {
-
-    }
-
     // Move in a straight line for a period of time
     void Update()
     {

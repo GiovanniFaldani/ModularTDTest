@@ -7,7 +7,7 @@ public class Turret_Preview : MonoBehaviour
     [SerializeField] Material blockedMaterial;
     public ModuleTypes moduleType;
 
-    private bool disableBuild = false; // prevents building turrets on top of each other
+    private bool disableBuild = false; // prevents building turrets
     private Turret_Base turretSelected = null;
     private MeshRenderer mesh;
 
@@ -41,20 +41,23 @@ public class Turret_Preview : MonoBehaviour
         {
             if (turretSelected != null)
             {
-                Turret_Builder.Instance.CreateModule(turretSelected, moduleType);
+                if (turretSelected.HasShooters())
+                    Turret_Builder.Instance.CreateModule(turretSelected, moduleType);
+                else if (IsThisUpgrade())
+                {
+                    MessagePrinter.Instance.PrintMessage("Upgrade must be stacked on a shooter!", 5);
+                    GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
+                }
+                else
+                    Turret_Builder.Instance.CreateModule(turretSelected, moduleType);
             }
-            else if (!IsThisUpgrade())
-            {
-                Turret_Base turretBase = Turret_Builder.Instance.CreateBase(transform.position);
-                Turret_Builder.Instance.CreateModule(turretBase, moduleType);
-            }
-            else
-            {
-                Debug.Log("Upgrade must be stacked on a shooter!");
-                GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
-                UIUpdater.Instance.gameObject.SetActive(true);
-            }
-            // reenable UI
+            UIUpdater.Instance.gameObject.SetActive(true);
+            Destroy(gameObject);
+        }
+        else if (Input.GetMouseButton(0))
+        {
+            MessagePrinter.Instance.PrintMessage("Module miust be placed on valid base!", 5);
+            GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
             UIUpdater.Instance.gameObject.SetActive(true);
             Destroy(gameObject);
         }
@@ -65,6 +68,7 @@ public class Turret_Preview : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             // undo build
+            MessagePrinter.Instance.PrintMessage("Build canceled", 2);
             GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
             UIUpdater.Instance.gameObject.SetActive(true);
             Destroy(gameObject);
@@ -90,7 +94,7 @@ public class Turret_Preview : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Path") || other.CompareTag("Goal"))
+        if (other.CompareTag("Path") || other.CompareTag("Goal") || other.CompareTag("Floor"))
         {
             DisableBuild();
         }
@@ -110,7 +114,7 @@ public class Turret_Preview : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Path") || other.CompareTag("Goal"))
+        if (other.CompareTag("Path") || other.CompareTag("Goal") || other.CompareTag("Floor"))
         {
             DisableBuild();
         }
@@ -130,13 +134,9 @@ public class Turret_Preview : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Path"))
+        if (other.CompareTag("Base"))
         {
-            EnableBuild();
-        }
-        else if (other.CompareTag("Base"))
-        {
-            EnableBuild();
+            DisableBuild();
             turretSelected = null;
         }
     }

@@ -30,7 +30,6 @@ public class Flamethrower : MonoBehaviour
     public void SetDirection(Vector3 newDirection)
     {
         this._direction = newDirection;
-        //return this;
     }
 
     public void SetDamage(int newDamage)
