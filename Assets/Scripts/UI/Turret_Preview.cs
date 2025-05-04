@@ -56,7 +56,7 @@ public class Turret_Preview : MonoBehaviour
         }
         else if (Input.GetMouseButton(0))
         {
-            MessagePrinter.Instance.PrintMessage("Module miust be placed on valid base!", 5);
+            MessagePrinter.Instance.PrintMessage("Module must be placed on valid base!", 5);
             GameManager.Instance.playerMoney += Turret_Builder.Instance.costs[moduleType];
             UIUpdater.Instance.gameObject.SetActive(true);
             Destroy(gameObject);
