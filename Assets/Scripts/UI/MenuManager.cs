@@ -17,26 +17,30 @@ public class MenuManager : MonoBehaviour
 
     public void ShowWinScreen()
     {
+        UIUpdater.Instance.gameObject.SetActive(false);
         winScreen.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ShowGameOverScreen()
     {
+        UIUpdater.Instance.gameObject.SetActive(false);
         gameOverScreen.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void ShowPauseScreen()
     {
+        UIUpdater.Instance.gameObject.SetActive(false);
         pauseScreen.SetActive(true);
         Time.timeScale = 0.0f;
     }
 
     public void UnPause()
     {
-        pauseScreen.SetActive(false);
         Time.timeScale = 1.0f;
+        pauseScreen.SetActive(false);
+        UIUpdater.Instance.gameObject.SetActive(true);
     }
 
     public void ReturnToMainMenu()
